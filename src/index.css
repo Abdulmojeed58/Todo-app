@@ -3,11 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --gray-200: #eaecf0;
   --gray-50: #f9fafb;
-  --gray-300: #D0D5DD;
+  --gray-300: #d0d5dd;
+  --text-done: #D0D5DD;
   --blue: #3f5bf6;
   --hover: #eaedfe;
 
@@ -17,7 +17,7 @@
 }
 
 body {
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 
 
@@ -27,4 +27,117 @@ body {
 
 .flex-center-col {
   @apply flex flex-col;
+}
+
+.time-input {
+  @apply border border-skin-border-gray h-full rounded-[8px]
+}
+
+.animate {
+animation: animate 2s linear 2s none normal normal;
+}
+
+@keyframes animate {
+0% {
+  transform: translateX(-100%);
+}
+
+100% {
+  transform: translateX(100%);
+}
+}
+
+
+
+
+.SG-datepicker {
+  margin: 0;
+}
+
+.SG-datepicker__calendar-container {
+}
+
+.SG-datepicker__input-container {
+  display: block;
+  width: calc(100%) !important;
+  /* height: 100% !important; */
+  margin: 0;
+  padding: 0;
+}
+
+.SG-datepicker__input-container input {
+  padding: 5px 0 !important;
+  border-radius: 5px;
+  display: inline !important;
+  width: 100%;
+  border: 1px solid #d0d5dd;
+
+}
+
+
+
+
+
+
+/* #app {
+  height: 100%;
+}
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+} */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

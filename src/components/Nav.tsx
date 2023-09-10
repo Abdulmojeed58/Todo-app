@@ -7,7 +7,7 @@ import Profile from "../assets/images/Avatar.png";
 
 const Nav = () => {
   return (
-    <div className="flex justify-between items-center py-5 px-[32px] border-b border-skin-gray-bg">
+    <div className="flex justify-between items-center py-5 border-b border-skin-gray-bg">
       <h1 className="font-bold text-[24px] font-inter">ToDo</h1>
 
       <nav>

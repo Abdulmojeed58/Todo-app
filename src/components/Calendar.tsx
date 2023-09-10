@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import { DatePicker } from "@gsebdev/react-simple-datepicker";
+
 import { FormCard } from "./Card";
-// import Calendar from 'moedim';
+import '../index.css';
 
-// const Calendar = require('moedim');
+function Calendar() {
+  const onChangeCallback = () => {
+    // a callback function when user select a date
+  };
 
-interface CalendarProps {}
-
-const CalendarCom: React.FC<CalendarProps> = ({}) => {
-  const [value, setValue] = useState<any>(new Date())
-  
-  
   return (
-    <FormCard>
-      <div>Calendar</div>
-    </FormCard>
-    // <Calendar value={value} onChange={(d: any) => setValue(d)} />
+    // <FormCard>
+      <DatePicker
+        id="datepicker-id"
+        name="date-demo"
+        onChange={onChangeCallback}
+        value={"01/02/2023"}
+      />
+    // </FormCard>
   );
-};
+}
 
-export default CalendarCom;
+export default Calendar;

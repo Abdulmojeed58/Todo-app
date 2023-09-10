@@ -9,6 +9,7 @@ interface ITaskState {
   isEditTask: boolean;
   isNewTask: boolean;
   change: boolean;
+  isModal: boolean;
 }
 
 const initialState: ITaskState = {
@@ -16,6 +17,7 @@ const initialState: ITaskState = {
   isEditTask: false,
   isNewTask: false,
   change: false,
+  isModal: false,
 };
 
 const taskSlice = createSlice({
@@ -28,6 +30,7 @@ const taskSlice = createSlice({
     },
     addTask: (state, action) => {
       state.change = true;
+      state.isModal = true;
       if (state.isEditTask) {
         state.isEditTask = true;
         const item = action.payload.item;
@@ -63,10 +66,10 @@ const taskSlice = createSlice({
 
     deleteTask: (state, action) => {
       state.change = true;
-
       const id = action.payload;
       const newtasks = state.items.filter((item)=> item.id !== id)
       state.items = newtasks;
+      state.isModal = false;
     },
 
     changeEditStatus: (state, action) => {
@@ -76,6 +79,10 @@ const taskSlice = createSlice({
     changeTaskStatus: (state, action) => {
       state.isNewTask = action.payload;
     },
+
+    changeModalStatus: (state, action) => {
+      state.isModal = action.payload;
+    }
   },
 });
 

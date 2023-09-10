@@ -28,7 +28,7 @@ function App() {
   }, [dispatch])
 
   return (
-    <div>
+    <div className="px-[2rem] sm:px-[2.5rem] md:px-[80px] min-h-screen pt-[1rem]">
       <Main />
     </div>
   );

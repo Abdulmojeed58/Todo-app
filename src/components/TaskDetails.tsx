@@ -21,6 +21,7 @@ const TaskDetails: React.FC<ITaskDetails> = ({
 
   const handleClose = () => {
     dispatch(taskViewActions.handleViewTaskStatus(false));
+    dispatch(taskActions.changeModalStatus(false))
   };
 
   const handleEditStatus = () => {
@@ -35,11 +36,11 @@ const TaskDetails: React.FC<ITaskDetails> = ({
   };
 
   return (
-    <FormCard>
+    <FormCard className="pb-[30vh] md:pb-5">
       <LazyLoadImage
         src={Close}
         alt="close btn"
-        className="ml-auto"
+        className="ml-auto cursor-pointer"
         onClick={handleClose}
       />
       <h1 className="font-bold text-[18px]">{title}</h1>

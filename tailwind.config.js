@@ -13,6 +13,7 @@ export default {
           "blue": "var(--blue)",
           "text-light": "var(--text-light)",
           "text-primary": "var(--text-primary)",
+          "text-done": "var(--text-done)"
         },
       },
       fontFamily: {

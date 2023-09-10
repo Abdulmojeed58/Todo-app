@@ -1,5 +1,5 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import { FaMicrophone } from "react-icons/fa";
 
 import Button from "./components/Button";
 import Nav from "./components/Nav";
@@ -9,7 +9,8 @@ import TaskForm from "./components/TaskForm";
 import TaskDetails from "./components/TaskDetails";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { taskActions } from "./store/taskSlice";
-import CalendarCom from "./components/Calendar";
+import Calendar from "./components/Calendar";
+import Modal from "./UI/Modal";
 
 const Main = () => {
   // const [isNewTask] = useState<boolean>(false);
@@ -17,13 +18,14 @@ const Main = () => {
   const isEditTask = useAppSelector((state) => state.tasks.isEditTask);
   const isViewTask = useAppSelector((state) => state.taskView.isViewTask);
   const taskItem = useAppSelector((state) => state.taskView.taskItem);
+  const isModal = useAppSelector(state => state.tasks.isModal)
   const dispatch = useAppDispatch();
 
   return (
     <div className="pb-[50px]">
       <header>
         <Nav />
-        <div className="flex justify-between items-center my-5 px-[32px]">
+        <div className="flex justify-between items-center my-5">
           <div>
             <h1 className="font-semibold text-[30px]">Good Morning!</h1>
             <p className="font-normal text-[16px]">You got some task to do.</p>
@@ -35,32 +37,65 @@ const Main = () => {
                 <p>Create New Task</p>
               </>
             }
-            onClick={() => dispatch(taskActions.changeTaskStatus(true))}
+            onClick={() => {
+              dispatch(taskActions.changeTaskStatus(true));
+              dispatch(taskActions.changeModalStatus(true));
+            }}
             variant="contained"
             type="button"
-            customClassName="hidden sm:block"
+            customClassName="hidden md:block"
           />
         </div>
       </header>
 
-      <main className="px-[32px] md:grid grid-cols-3 md:gap-[24px]">
-        <div className="col-span-2">
-          <h3 className="mb-3 text-skin-text-primary font-semibold text-[16px]">
-            My Tasks
-          </h3>
+      <main className="md:grid grid-cols-3 gap-[5px] md:gap-[24px]">
+        <div className="col-span-2">          
           <Tasks />
         </div>
-        <div className="md:border-l-[1px] border-skin-border-gray md:pl-[24px]">
-          {/* {isViewTask ? (
-            <TaskDetails {...taskItem} />
-          ) : isNewTask || isEditTask ? (
-            <TaskForm />
-          ) : (
-            <Calendar />
-          )} */}
+
+        {/* DESKTOP */}
+        <div className="md:border-l-[1px] border-skin-border-gray md:pl-[24px] hidden md:block">
           {isViewTask && <TaskDetails {...taskItem} />}
           {!isViewTask ? isNewTask || isEditTask ? <TaskForm /> : <></> : <></>}
-          {!isNewTask && !isEditTask ? <CalendarCom /> : <></>}
+          {!isNewTask && !isEditTask && !isViewTask ? <Calendar /> : <></>}
+        </div>
+
+
+
+        {/* // MOBILE */}
+        <div className="md:hidden">
+          <Modal>
+            {isViewTask && <TaskDetails {...taskItem} />}
+            {!isViewTask ? (
+              isNewTask || isEditTask ? (
+                <TaskForm />
+              ) : (
+                <></>
+              )
+            ) : (
+              <></>
+            )}
+          </Modal>
+          <div className="fixed bg-white left-0 right-0 bottom-0 md:hidden w-full py-[1rem] px-[2rem] sm:px-[2.5rem] md:px-[3rem]">
+            <Button
+              label={
+                <>
+                  <span className="text-skin-text-gray text-[16px] font-normal">
+                    Input task
+                  </span>
+                  <FaMicrophone className="text-[#3F5BF6]" />
+                </>
+              }
+              variant="outlined"
+              type="button"
+              onClick={() => {
+                dispatch(taskActions.changeTaskStatus(true));
+                dispatch(taskActions.changeModalStatus(true));
+              }}
+              customClassName={`${isModal ? 'hidden' : 'block'} bg-skin-bg-gray w-full h-[48px]`}
+              spanClassName="justify-between"
+            />
+          </div>
         </div>
       </main>
     </div>
