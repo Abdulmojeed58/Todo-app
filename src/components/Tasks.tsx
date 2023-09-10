@@ -135,7 +135,7 @@ const Tasks = () => {
             customClassName="border-none"
             spanClassName='gap-[8px]'
           />
-          <div className="flex">
+          <div className="md:flex hidden">
             {startPaginationNumber}
             <div className="flex w-[40px] h-[40px] text-center justify-center items-center">
               <p className="p-8 text-center text-[14px] font-medium">...</p>
