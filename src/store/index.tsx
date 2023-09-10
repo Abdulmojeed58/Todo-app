@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import taskReducer from "./taskSlice";
 import taskViewReducer from "./taskViewSlice";
+import dateReducer from './date-slice';
 
 const store = configureStore({
     reducer: {
         tasks: taskReducer,
         taskView: taskViewReducer,
+        date: dateReducer,
     }
 })
 

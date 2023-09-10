@@ -1,55 +1,12 @@
-// Import Swiper React components
-import {useState, useEffect} from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
-import 'swiper/css';
-// import 'swiper/css/pagination';
 
-// import './styles.css';
-
-// import required modules
-import { Pagination } from 'swiper/modules';
+import "swiper/css";
+import { Pagination } from "swiper/modules";
 
 import DateItem from "./DateItem";
 
-const DateCom = ({}) => {
-    const [slidesNo, setSlideNumber] = useState<number>()
-
-    useEffect(() => {
-        // Define a function to handle the screen resize
-        const handleResize = () => {
-          const screenWidth = window.innerWidth;
-          if (screenWidth < 1000) {
-            setSlideNumber(4);
-          } else if(screenWidth >= 1000 && screenWidth < 1300) {
-            setSlideNumber(8);
-        } else if(screenWidth >= 1300 && screenWidth < 1600) {
-            setSlideNumber(9);
-        } else if(screenWidth >= 1600 && screenWidth < 1900) {
-            setSlideNumber(10);
-        } else if(screenWidth >= 1900 && screenWidth < 2200) {
-            setSlideNumber(11);
-
-        } 
-        console.log(screenWidth)
-    };
-      
-        window.addEventListener("resize", handleResize);
-      
-        handleResize();
-      
-        return () => {
-          window.removeEventListener("resize", handleResize);
-        };
-      }, []);
-
-
-    // console.log(slidesNo)
-
-
-
-  const monthNames: string[] = [
+export const monthNames: string[] = [
     "January",
     "February",
     "March",
@@ -64,6 +21,8 @@ const DateCom = ({}) => {
     "December",
   ];
 
+const DateCom = ({}) => {
+
   const daysNames: string[] = [
     "Sun",
     "Mon",
@@ -74,8 +33,10 @@ const DateCom = ({}) => {
     "Sat",
   ];
 
-  const startYear = 2021;
-  const endYear = 2023;
+  const date = new Date()
+
+  const startYear = date.getFullYear();
+  const endYear = date.getFullYear();
 
   const yearsAndDays: {
     year: number;
@@ -95,25 +56,26 @@ const DateCom = ({}) => {
       }
     }
   }
-  // console.log(yearsAndDays);
+  
   return (
     <div className="flex gap-[16px] overflow-x-hidden mb-5">
       <Swiper
-        slidesPerView={slidesNo}
+        slidesPerView={"auto"}
         centeredSlides={true}
-        spaceBetween={30}
+        spaceBetween={10}
         grabCursor={true}
         pagination={{
           clickable: true,
         }}
         modules={[Pagination]}
         className="mySwiper"
+        initialSlide={0}      
       >
-          {yearsAndDays.map((date, id) => (
-        <SwiperSlide>
-            <DateItem key={id} {...date} />
-        </SwiperSlide>
-          ))}
+        {yearsAndDays.map((date, i) => (
+          <SwiperSlide key={i} style={{width: '5rem'}}>
+            <DateItem {...date} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

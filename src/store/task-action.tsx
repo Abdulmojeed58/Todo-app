@@ -18,10 +18,15 @@ export const getData = () => {
         title: task.title,
         startTime: "00",
         endTime: "00",
+        date: {
+          year: '',
+          month: '',
+          day: '1'
+        },
         id: `${task.id}`,
         completed: task.completed,
       }));
-    //   console.log(newTaskData);
+    
       dispatch(taskActions.replaceTask(newTaskData));
       console.log("success");
     } catch (err) {
@@ -32,7 +37,7 @@ export const getData = () => {
 
 export const sendData = (task: ITaskDetails) => {
   const { title, id, completed } = task;
-  return async (dispatch: any) => {
+  return async () => {
     const fetchData = async () => {
       const res = await fetch("https://jsonplaceholder.typicode.com/todos", {
         method: "POST",

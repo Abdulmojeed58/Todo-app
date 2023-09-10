@@ -9,12 +9,14 @@ import { useAppDispatch } from "../hooks";
 import { taskActions } from "../store/taskSlice";
 import { taskViewActions } from "../store/taskViewSlice";
 import { ITaskDetails } from "../interfaces/taskInterface";
+import { monthNames } from "./Date";
 
 
 const TaskDetails: React.FC<ITaskDetails> = ({
   title,
   startTime,
   endTime,
+  date,
   id,
 }) => {
   const dispatch = useAppDispatch();
@@ -26,8 +28,7 @@ const TaskDetails: React.FC<ITaskDetails> = ({
 
   const handleEditStatus = () => {
     dispatch(taskActions.changeEditStatus(true));
-
-    handleClose();
+    dispatch(taskViewActions.handleViewTaskStatus(false));
   };
 
   const handleDelete = (id: string) => {
@@ -35,8 +36,10 @@ const TaskDetails: React.FC<ITaskDetails> = ({
     handleClose();
   };
 
+  
+
   return (
-    <FormCard className="pb-[30vh] md:pb-5">
+    <FormCard className="pb-[253px] h-[648px] md:h-auto md:pb-5">
       <LazyLoadImage
         src={Close}
         alt="close btn"
@@ -47,7 +50,7 @@ const TaskDetails: React.FC<ITaskDetails> = ({
       <div className="my-[32px] flex-center-col gap-[8px]">
         <div className="flex-center-row gap-[8px]">
           <LazyLoadImage src={CalendarIcon} alt="date" />
-          <span>20th January, 2023</span>
+          <span>{`${date.day}${+date.day === 1 ? 'st' : +date.day === 2 ? 'nd' : +date.day === 3 ? '3rd' : 'th'} ${monthNames[+date.month]}, ${date.year}`}</span>
         </div>
         <div className="flex-center-row gap-[8px]">
           <LazyLoadImage src={CalendarIcon} alt="date" />

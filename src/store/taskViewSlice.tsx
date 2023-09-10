@@ -1,13 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ITaskDetails } from "../interfaces/taskInterface";
 
 interface ITaskState {
-  taskItem: {
-    title: string;
-    startTime: string;
-    endTime: string;
-    id: string;
-    completed: boolean;
-  };
+  taskItem: ITaskDetails;
   isViewTask: boolean;
 }
 
@@ -16,6 +11,11 @@ const initialState: ITaskState = {
     title: "",
     startTime: "",
     endTime: "",
+    date: {
+      year: '',
+      month: '',
+      day: ''
+    },
     id: "",
     completed: false,
   },
@@ -32,6 +32,7 @@ const taskViewSlice = createSlice({
         startTime: action.payload.startTime,
         endTime: action.payload.endTime,
         id: action.payload.id,
+        date: action.payload.date,
         completed: action.payload.completed,
       };
     },

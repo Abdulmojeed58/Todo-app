@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import "./App.css";
 import Main from "./MainApp";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { getData, sendData } from "./store/task-action";

@@ -26,7 +26,7 @@ const taskSlice = createSlice({
   reducers: {
     replaceTask: (state, action) => {
       state.items = action.payload;
-      // console.log(action.payload);
+      
     },
     addTask: (state, action) => {
       state.change = true;
@@ -37,10 +37,10 @@ const taskSlice = createSlice({
         const existingTask = state.items.find((task) => task.id === item.id);
 
         if (existingTask) {
-          // Update the existing task
           existingTask.title = action.payload.title;
           existingTask.startTime = action.payload.startTime;
           existingTask.endTime = action.payload.endTime;
+          existingTask.date = action.payload.date;
           existingTask.completed = false;
         }
       } else {
@@ -49,6 +49,7 @@ const taskSlice = createSlice({
           title: action.payload.title,
           startTime: action.payload.startTime,
           endTime: action.payload.endTime,
+          date: action.payload.date,
           id: nanoid(),
           completed: false,
         });

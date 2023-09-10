@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { ITaskDetails } from "../interfaces/taskInterface";
+import { IDate, ITaskDetails } from "../interfaces/taskInterface";
 import { taskActions } from "../store/taskSlice";
 import { taskViewActions } from "../store/taskViewSlice";
-import DateCom from "./Date";
+import DateCom, { monthNames } from "./Date";
 
 import TaskItem from "./TaskItem";
 import Button from "./Button";
@@ -11,6 +11,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Tasks = () => {
   const tasksState = useAppSelector((state) => state.tasks.items);
+  const dateState = useAppSelector((state) => state.date);
   const dispatch = useAppDispatch();
   const {
     paginatedList,
@@ -20,7 +21,9 @@ const Tasks = () => {
     listNumber,
   } = usePagination(tasksState);
 
-  // console.log(paginatedList);
+  
+
+
 
   const handlePrevPage = () => {
     if (currentPage > 0) {
@@ -38,6 +41,7 @@ const Tasks = () => {
     title: string,
     startTime: string,
     endTime: string,
+    date: IDate,
     id: string
   ) => {
     dispatch(taskViewActions.handleViewTaskStatus(true));
@@ -46,6 +50,7 @@ const Tasks = () => {
         title,
         startTime,
         endTime,
+        date,
         id,
       })
     );
@@ -61,7 +66,7 @@ const Tasks = () => {
       key={index}
       {...task}
       onClick={() =>
-        handleClick(task.title, task.startTime, task.endTime, task.id)
+        handleClick(task.title, task.startTime, task.endTime, task.date, task.id)
       }
       inputProps={{
         onChange: () => handleChange(task),
@@ -80,8 +85,7 @@ const Tasks = () => {
 
   const startPaginationNumber = startPagination.map((list: any) => {
 
-//     console.log("listNumber:", list-1);
-// console.log("currentPage:", currentPage);
+
     return (
       <button
         key={list}
@@ -107,8 +111,9 @@ const Tasks = () => {
 
   return (
     <div className="pb-5">
+      <h3 className="text-skin-text-primary font-semibold text-[16px] leading-6 mb-[16px]">{monthNames[+dateState.month - 1]} {dateState.year}</h3>
       <DateCom />
-      <h3 className="mb-3 text-skin-text-primary font-semibold text-[16px]">
+      <h3 className="mb-3 text-skin-text-primary font-semibold text-[16px] mt-[32px]">
         My Tasks
       </h3>
       <div>
@@ -117,7 +122,7 @@ const Tasks = () => {
         </div>
 
         {/* /////// PAGINATION */}
-        <div className="flex items-center justify-between mt-[20px]">
+        <div className="flex items-center justify-between mt-[20px] mb-9 md:mb-0">
           <Button
             label={
               <>

@@ -13,7 +13,6 @@ import Calendar from "./components/Calendar";
 import Modal from "./UI/Modal";
 
 const Main = () => {
-  // const [isNewTask] = useState<boolean>(false);
   const isNewTask = useAppSelector((state) => state.tasks.isNewTask);
   const isEditTask = useAppSelector((state) => state.tasks.isEditTask);
   const isViewTask = useAppSelector((state) => state.taskView.isViewTask);
@@ -25,10 +24,10 @@ const Main = () => {
     <div className="pb-[50px]">
       <header>
         <Nav />
-        <div className="flex justify-between items-center my-5">
+        <div className="flex justify-between items-center mt-[48px]">
           <div>
-            <h1 className="font-semibold text-[30px]">Good Morning!</h1>
-            <p className="font-normal text-[16px]">You got some task to do.</p>
+            <h1 className="font-semibold text-[30px] leading-[38px]">Good Morning!</h1>
+            <p className="font-normal text-[16px] mt-[4px] leading-6">You got some task to do.</p>
           </div>
           <Button
             label={
@@ -48,7 +47,7 @@ const Main = () => {
         </div>
       </header>
 
-      <main className="md:grid grid-cols-3 gap-[5px] md:gap-[24px]">
+      <main className="md:grid grid-cols-3 gap-[5px] md:gap-[24px] mt-[32px]">
         <div className="col-span-2">          
           <Tasks />
         </div>
@@ -92,7 +91,7 @@ const Main = () => {
                 dispatch(taskActions.changeTaskStatus(true));
                 dispatch(taskActions.changeModalStatus(true));
               }}
-              customClassName={`${isModal ? 'hidden' : 'block'} bg-skin-bg-gray w-full h-[48px]`}
+              customClassName={`${isModal ? 'hidden' : 'block'} bg-skin-bg-gray w-full h-[48px] hover:bg-white`}
               spanClassName="justify-between"
             />
           </div>
