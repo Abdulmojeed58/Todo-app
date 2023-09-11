@@ -58,7 +58,7 @@ export const sendData = (task: ITaskDetails) => {
       return data;
     };
     try {
-      const taskData = await fetchData();
+      await fetchData();
     } catch (err) {
       console.log(err);
     }
