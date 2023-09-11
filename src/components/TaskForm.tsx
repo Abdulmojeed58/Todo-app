@@ -25,14 +25,10 @@ const TaskForm = () => {
 
     if (!inputRef.current.value) return;
 
-    console.log(inputRef.current.value);
-
     const date = new Date(dateRef.current.value);
     const day = date.getDate().toString().padStart(2, "0");
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const year = date.getFullYear().toString();
-
-    console.log(day, month, year);
 
     dispatch(
       taskActions.addTask({

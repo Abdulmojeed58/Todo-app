@@ -21,10 +21,6 @@ const Tasks = () => {
     listNumber,
   } = usePagination(tasksState);
 
-  
-
-
-
   const handlePrevPage = () => {
     if (currentPage > 0) {
       setCurrentPageAndUpdate(currentPage - 1);
@@ -66,7 +62,13 @@ const Tasks = () => {
       key={index}
       {...task}
       onClick={() =>
-        handleClick(task.title, task.startTime, task.endTime, task.date, task.id)
+        handleClick(
+          task.title,
+          task.startTime,
+          task.endTime,
+          task.date,
+          task.id
+        )
       }
       inputProps={{
         onChange: () => handleChange(task),
@@ -80,17 +82,18 @@ const Tasks = () => {
   let endPagination: string[] = [];
   if (listNumber.length > 3) {
     startPagination = listNumber.slice(currentPage, currentPage + 3);
+
     endPagination = listNumber.slice(-3);
   }
 
   const startPaginationNumber = startPagination.map((list: any) => {
-
-
     return (
       <button
         key={list}
         onClick={() => setCurrentPageAndUpdate(list - 1)}
-        className={`${currentPage === parseInt(list) ? 'bg-skin-bg-gray' : ''} p-[12px] flex justify-center items-center w-[40px] h-[40px] mx-2 cursor-pointer rounded-full`}
+        className={`${
+          currentPage === parseInt(list) - 1 ? "bg-skin-bg-gray" : ""
+        } p-[12px] flex justify-center items-center w-[40px] h-[40px] mx-2 cursor-pointer rounded-full`}
       >
         {list}
       </button>
@@ -102,7 +105,9 @@ const Tasks = () => {
       <button
         key={list}
         onClick={() => setCurrentPageAndUpdate(list - 1)}
-        className={`${currentPage === parseInt(list) ? 'bg-skin-bg-gray' : ''} p-[12px] flex justify-center items-center w-[40px] h-[40px] mx-2 cursor-pointer rounded-full`}
+        className={`${
+          currentPage === parseInt(list) - 1 ? "bg-skin-bg-gray" : ""
+        } p-[12px] flex justify-center items-center w-[40px] h-[40px] mx-2 cursor-pointer rounded-full`}
       >
         {list}
       </button>
@@ -111,7 +116,9 @@ const Tasks = () => {
 
   return (
     <div className="pb-5">
-      <h3 className="text-skin-text-primary font-semibold text-[16px] leading-6 mb-[16px]">{monthNames[+dateState.month - 1]} {dateState.year}</h3>
+      <h3 className="text-skin-text-primary font-semibold text-[16px] leading-6 mb-[16px]">
+        {monthNames[+dateState.month - 1]} {dateState.year}
+      </h3>
       <DateCom />
       <h3 className="mb-3 text-skin-text-primary font-semibold text-[16px] mt-[32px]">
         My Tasks
@@ -127,15 +134,15 @@ const Tasks = () => {
             label={
               <>
                 <FaArrowLeft />
-                <span  className="text-[14px] font-semibold">Previous</span>
+                <span className="text-[14px] font-semibold">Previous</span>
               </>
             }
             variant="outlined"
             onClick={handlePrevPage}
             customClassName="border-none"
-            spanClassName='gap-[8px]'
+            spanClassName="gap-[8px]"
           />
-          <div className="md:flex hidden">
+          <div className="hidden md:flex flex-wrap">
             {startPaginationNumber}
             <div className="flex w-[40px] h-[40px] text-center justify-center items-center">
               <p className="p-8 text-center text-[14px] font-medium">...</p>
@@ -152,7 +159,7 @@ const Tasks = () => {
             variant="outlined"
             onClick={handleNextPage}
             customClassName="border-none"
-            spanClassName='gap-[8px]'
+            spanClassName="gap-[8px]"
           />
         </div>
       </div>
