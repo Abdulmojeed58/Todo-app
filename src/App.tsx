@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getData())
-      
+
   }, [dispatch]);
 
   useEffect(()=>{
@@ -21,10 +21,14 @@ function App() {
       return;
     }
 
+    if(taskItem.items.length === 0) {
+      return
+    }
+
     ///
     dispatch(sendData(taskItem.items[0]))
 
-  }, [dispatch])
+  }, [taskItem.items, dispatch])
 
   return (
     <div className="px-[2rem] sm:px-[2.5rem] md:px-[80px] min-h-screen pt-[1rem]">

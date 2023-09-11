@@ -63,7 +63,7 @@ body {
   padding: 5px 0 !important;
   border-radius: 5px;
   display: inline !important;
-  width: 100%;
+  width: 100% !important;
   border: 1px solid #d0d5dd;
   text-align: center;
 }

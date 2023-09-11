@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
-import { DUMMY_TASK } from "../components/dummy_task";
 import { ITaskDetails } from "../interfaces/taskInterface";
 
 interface ITaskState {
@@ -13,7 +12,7 @@ interface ITaskState {
 }
 
 const initialState: ITaskState = {
-  items: DUMMY_TASK,
+  items: [],
   isEditTask: false,
   isNewTask: false,
   change: false,

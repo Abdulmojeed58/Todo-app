@@ -57,7 +57,8 @@ const Tasks = () => {
     dispatch(taskActions.changeCompletedStatus(task));
   };
 
-  const allTask = paginatedList.map((task: any, index: any) => (
+
+  const allTask = paginatedList?.map((task: any, index: any) => (
     <TaskItem
       key={index}
       {...task}
@@ -125,7 +126,7 @@ const Tasks = () => {
       </h3>
       <div>
         <div className="flex flex-col gap-[16px] h-[60vh] md:h-[60vh] overflow-y-scroll">
-          {allTask}
+          {tasksState.length === 0 ? <div className="flex items-center justify-center">Loading ....</div> : allTask}
         </div>
 
         {/* /////// PAGINATION */}
